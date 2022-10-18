@@ -1,0 +1,34 @@
+
+syntax = "proto3";
+
+package protoBuiltInFunctions;
+
+option go_package = "mect";
+option (gogoproto.stable_marshaler_all) = true;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+// MECToken holds the data for a MotherEarth standard digital token transaction
+message MECToken {
+	uint32 Type            = 1 [(gogoproto.jsontag) = "Type"];
+	bytes  Value           = 2 [(gogoproto.jsontag) = "Value", (gogoproto.casttypewith) = "math/big.Int;github.com/ME-MotherEarth/me-core/data.BigIntCaster"];
+	bytes  Properties      = 3 [(gogoproto.jsontag) = "Properties"];
+	MetaData TokenMetaData = 4 [(gogoproto.jsontag) = "MetaData"];
+	bytes  Reserved        = 5 [(gogoproto.jsontag) = "Reserved"];
+}
+
+// MECTRoles holds the roles for a given token and the given address
+message MECTRoles {
+	repeated bytes Roles = 1 [(gogoproto.jsontag) = "roles"];
+}
+
+// MetaData hold the metadata structure for the MECT token
+message MetaData {
+	uint64 Nonce         = 1 [(gogoproto.jsontag) = "Nonce"];
+	bytes  Name          = 2 [(gogoproto.jsontag) = "Name"];
+	bytes  Creator       = 3 [(gogoproto.jsontag) = "Creator"];
+	uint32 Royalties     = 4 [(gogoproto.jsontag) = "Royalties"];
+	bytes  Hash          = 5 [(gogoproto.jsontag) = "Hash"];
+	repeated bytes  URIs = 6 [(gogoproto.jsontag) = "URIs"];
+	bytes  Attributes    = 7 [(gogoproto.jsontag) = "Attributes"];
+}
